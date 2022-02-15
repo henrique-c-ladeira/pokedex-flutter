@@ -4,8 +4,9 @@ import 'package:myflutterapp/extensions/string_extension.dart';
 class Pokemon {
   final String name;
   final String image;
+  final String number;
 
-  Pokemon({required this.name, required this.image});
+  Pokemon({required this.name, required this.image, required this.number});
 
   factory Pokemon.fromJson(Map<String, dynamic> json) {
     final pokemonName = json['name'] as String;
@@ -17,10 +18,11 @@ class Pokemon {
     return Pokemon(
       name: pokemonName.capitalize(),
       image: pokemonImageUrl,
+      number: pokemonNumber,
     );
   }
 
   PokemonEntity toEntity() {
-    return PokemonEntity(name: name, image: image);
+    return PokemonEntity(name: name, image: image, number: number);
   }
 }
