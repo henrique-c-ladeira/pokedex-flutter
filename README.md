@@ -1,3 +1,3 @@
 # Pokedex made with Flutter
 
-<img src="./docs/pokedex.gif" width="30%">
+<img src="./docs/demo.gif" width="30%">
