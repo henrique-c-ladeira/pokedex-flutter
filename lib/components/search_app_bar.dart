@@ -37,7 +37,7 @@ class SearchAppBar extends SliverPersistentHeaderDelegate {
   double get maxExtent => 350;
 
   @override
-  double get minExtent => 130;
+  double get minExtent => 90;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
@@ -47,18 +47,13 @@ class SearchAppBar extends SliverPersistentHeaderDelegate {
 class HeaderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    var controlPoint1 = Offset(size.width * 0.8, size.height * 0.8);
-    var controlPoint2 = Offset(0, size.height * 0.8);
-    var endPoint2 = Offset(size.width * 0.4, size.height * 0.8);
-    var endPoint = Offset(size.width, size.height);
+    var controlPoint2 = Offset(size.width * 0.5, size.height);
+    var endPoint2 = Offset(size.width, 250);
 
     Path path = Path()
-      ..lineTo(0, size.height * 0.6)
+      ..lineTo(0, 250)
       ..quadraticBezierTo(
           controlPoint2.dx, controlPoint2.dy, endPoint2.dx, endPoint2.dy)
-      ..quadraticBezierTo(
-          controlPoint1.dx, controlPoint1.dy, endPoint.dx, endPoint.dy)
-      ..lineTo(size.width, size.height)
       ..lineTo(size.width, 0)
       ..close();
 
