@@ -1,6 +1,6 @@
-import 'package:myflutterapp/entities/pokemon_details_entity.dart';
+import 'package:myflutterapp/layers/domain/entities/pokemon_details_entity.dart';
 
-class PokemonDetails {
+class PokemonDetailsDto {
   List<Abilities>? abilities;
   int? baseExperience;
   List<Forms>? forms;
@@ -20,7 +20,7 @@ class PokemonDetails {
   List<Types>? types;
   int? weight;
 
-  PokemonDetails(
+  PokemonDetailsDto(
       {this.abilities,
       this.baseExperience,
       this.forms,
@@ -43,13 +43,15 @@ class PokemonDetails {
   PokemonDetailsEntity toEntity() {
     return PokemonDetailsEntity(
       name: name!,
-      image: sprites!.other!.officialArtwork!.frontDefault!,
-      stats: stats!,
-      type: types!.map((e) => e.type!.name!).toList(),
+      number: id!,
+      imageUrl:
+          'https://img.pokemondb.net/sprites/black-white/anim/normal/$name.gif', //sprites!.other!.officialArtwork!.frontDefault!,
+      stats: stats!.map((e) => NameValue(e.stat!.name!, e.baseStat!)).toList(),
+      types: types!.map((e) => e.type!.name!).toList(),
     );
   }
 
-  PokemonDetails.fromJson(Map<String, dynamic> json) {
+  PokemonDetailsDto.fromJson(Map<String, dynamic> json) {
     if (json["abilities"] is List) {
       abilities = json["abilities"] == null
           ? null
@@ -115,7 +117,7 @@ class PokemonDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (abilities != null) {
       data["abilities"] = abilities?.map((e) => e.toJson()).toList();
     }
@@ -166,7 +168,7 @@ class Types {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["slot"] = slot;
     if (type != null) data["type"] = type?.toJson();
     return data;
@@ -185,7 +187,7 @@ class Type {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;
@@ -208,7 +210,7 @@ class Stats {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["base_stat"] = baseStat;
     data["effort"] = effort;
     if (stat != null) data["stat"] = stat?.toJson();
@@ -476,7 +478,7 @@ class UltraSunUltraMoon {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["front_default"] = frontDefault;
     data["front_female"] = frontFemale;
     data["front_shiny"] = frontShiny;
@@ -524,7 +526,7 @@ class GenerationVi {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (omegarubyAlphasapphire != null) {
       data["omegaruby-alphasapphire"] = omegarubyAlphasapphire?.toJson();
     }
@@ -555,7 +557,7 @@ class XY {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["front_default"] = frontDefault;
     data["front_female"] = frontFemale;
     data["front_shiny"] = frontShiny;
@@ -657,7 +659,7 @@ class BlackWhite {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (animated != null) data["animated"] = animated?.toJson();
     data["back_default"] = backDefault;
     data["back_female"] = backFemale;
@@ -743,7 +745,7 @@ class GenerationIv {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (diamondPearl != null) {
       data["diamond-pearl"] = diamondPearl?.toJson();
     }
@@ -836,7 +838,7 @@ class HeartgoldSoulsilver {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["back_default"] = backDefault;
     data["back_female"] = backFemale;
     data["back_shiny"] = backShiny;
@@ -883,7 +885,7 @@ class DiamondPearl {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["back_default"] = backDefault;
     data["back_female"] = backFemale;
     data["back_shiny"] = backShiny;
@@ -921,7 +923,7 @@ class GenerationIii {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (emerald != null) data["emerald"] = emerald?.toJson();
     if (fireredLeafgreen != null) {
       data["firered-leafgreen"] = fireredLeafgreen?.toJson();
@@ -1003,7 +1005,7 @@ class Emerald {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["front_default"] = frontDefault;
     data["front_shiny"] = frontShiny;
     return data;
@@ -1031,7 +1033,7 @@ class GenerationIi {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (crystal != null) data["crystal"] = crystal?.toJson();
     if (gold != null) data["gold"] = gold?.toJson();
     if (silver != null) data["silver"] = silver?.toJson();
@@ -1066,7 +1068,7 @@ class Silver {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["back_default"] = backDefault;
     data["back_shiny"] = backShiny;
     data["front_default"] = frontDefault;
@@ -1103,7 +1105,7 @@ class Gold {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["back_default"] = backDefault;
     data["back_shiny"] = backShiny;
     data["front_default"] = frontDefault;
@@ -1224,7 +1226,7 @@ class Yellow {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["back_default"] = backDefault;
     data["back_gray"] = backGray;
     data["back_transparent"] = backTransparent;
@@ -1267,7 +1269,7 @@ class RedBlue {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["back_default"] = backDefault;
     data["back_gray"] = backGray;
     data["back_transparent"] = backTransparent;
@@ -1354,7 +1356,7 @@ class Home {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["front_default"] = frontDefault;
     data["front_female"] = frontFemale;
     data["front_shiny"] = frontShiny;
@@ -1377,7 +1379,7 @@ class DreamWorld {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["front_default"] = frontDefault;
     data["front_female"] = frontFemale;
     return data;
@@ -1396,7 +1398,7 @@ class Species {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;
@@ -1458,7 +1460,7 @@ class VersionGroupDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["level_learned_at"] = levelLearnedAt;
     if (moveLearnMethod != null) {
       data["move_learn_method"] = moveLearnMethod?.toJson();
@@ -1482,7 +1484,7 @@ class VersionGroup {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;
@@ -1501,7 +1503,7 @@ class MoveLearnMethod {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;
@@ -1520,7 +1522,7 @@ class Move {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;
@@ -1547,7 +1549,7 @@ class HeldItems {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (item != null) data["item"] = item?.toJson();
     if (versionDetails != null) {
       data["version_details"] = versionDetails?.map((e) => e.toJson()).toList();
@@ -1571,7 +1573,7 @@ class VersionDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["rarity"] = rarity;
     if (version != null) data["version"] = version?.toJson();
     return data;
@@ -1590,7 +1592,7 @@ class Version1 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;
@@ -1609,7 +1611,7 @@ class Item {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;
@@ -1713,7 +1715,7 @@ class Ability {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["name"] = name;
     data["url"] = url;
     return data;

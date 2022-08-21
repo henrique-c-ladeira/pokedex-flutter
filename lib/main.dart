@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myflutterapp/pages/home.dart';
+import 'package:myflutterapp/layers/presentation/ui/pages/launch_page.dart';
+import 'package:myflutterapp/layers/presentation/ui/pages/pokemon_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: Home(),
+      home: const LaunchPage(),
     );
   }
 }
